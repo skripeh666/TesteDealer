@@ -1,0 +1,52 @@
+﻿@model IEnumerable<testeDealer.Models.Cliente>
+@{
+    ViewBag.Title = "Clientes";
+}
+
+<h2>Clientes</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo Cliente", "Create")
+</p>
+
+<form method="get">
+    <p>
+        Nome do Cliente: @Html.TextBox("search") <input type="submit" value="Pesquisar" />
+    </p>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Cidade</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.NmCliente)</td>
+                <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdCliente }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.IdCliente }, new { @class = "delete-link" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".delete-link").click(function (e) {
+                var result = confirm("Você tem certeza que deseja excluir este registro?");
+                if (!result) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

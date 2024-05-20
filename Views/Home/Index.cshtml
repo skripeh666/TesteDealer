@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Bem-vindo ao Meu Projeto</h1>
+    <p class="lead">Este é um exemplo de como você pode personalizar a página inicial do seu projeto ASP.NET MVC.</p>
+    <a class="btn btn-primary btn-lg col-3" href="@Url.Action("Index", "Cliente")">Ver Clientes</a>
+    <a class="btn btn-primary btn-lg col-3" href="@Url.Action("Index", "Produto")">Ver Produtos</a>
+    <a class="btn btn-primary btn-lg col-3" href="@Url.Action("Index", "Venda")">Ver Vendas</a>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Últimos Clientes</h2>
+        <ul>
+            @foreach (var cliente in ViewBag.UltimosClientes as List<testeDealer.Models.Cliente>)
+            {
+                <li>@cliente.NmCliente</li>
+            }
+        </ul>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Cliente")">Ver Todos os Clientes &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Últimos Produtos</h2>
+        <ul>
+            @foreach (var produto in ViewBag.UltimosProdutos as List<testeDealer.Models.Produto>)
+            {
+                <li>@produto.DscProduto</li>
+            }
+        </ul>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Produto")">Ver Todos os Produtos &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Últimas Vendas</h2>
+        <ul>
+            @foreach (var venda in ViewBag.UltimasVendas as List<testeDealer.Models.Venda>)
+            {
+                <li>@venda.IdVenda - Cliente: @venda.IdCliente - Produto: @venda.IdProduto</li>
+            }
+        </ul>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Venda")">Ver Todas as Vendas &raquo;</a></p>
+    </div>
+</div>

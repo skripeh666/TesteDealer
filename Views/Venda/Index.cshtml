@@ -1,0 +1,60 @@
+﻿@model IEnumerable<testeDealer.Models.Venda>
+@{
+    ViewBag.Title = "Vendas";
+}
+
+<h2>Vendas</h2>
+
+<p>
+    @Html.ActionLink("Criar Nova Venda", "Create")
+</p>
+
+<form method="get">
+    <p>
+        Cliente ou Produto: @Html.TextBox("search") <input type="submit" value="Pesquisar" />
+    </p>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Data da Venda</th>
+            <th>Valor Total</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Cliente.NmCliente)</td>
+                <td>@Html.DisplayFor(modelItem => item.Produto.DscProduto)</td>
+                <td>@Html.DisplayFor(modelItem => item.QtdVenda)</td>
+                <td>@Html.DisplayFor(modelItem => item.VlrUnitarioVenda)</td>
+                <td>@Html.DisplayFor(modelItem => item.DthVenda)</td>
+                <td>@Html.DisplayFor(modelItem => item.VlrTotalVenda)</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdVenda }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.IdVenda }, new { @class = "delete-link" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".delete-link").click(function (e) {
+                var result = confirm("Você tem certeza que deseja excluir este registro?");
+                if (!result) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}
